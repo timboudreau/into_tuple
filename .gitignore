@@ -1,0 +1,19 @@
+/target
+.idea/
+nbproject/
+/build
+bindings/
+.lapce/
+
+# Generated code created by build.rs
+/src/generated_tests.rs
+/src/into_tuple.rs
+/tests/generated_tests.rs
+
+.DS_Store
+Cargo.lock
+*.orig
+*.tmp
+~*
+*.udl
+*.diff

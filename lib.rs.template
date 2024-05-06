@@ -1,0 +1,30 @@
+//! This crate provides a trait for converting rust constant-size *arrays* (not `Vec`s!) into tuples
+//! with the same bound.  An esoteric problem, perhaps, but when you have it, you have it. It is useful
+//! when using [const generics](https://doc.rust-lang.org/reference/items/generics.html#const-generics)
+//! to support specific numbers of items.
+//!
+//! The `IntoTuple` trait will be available on arrays and borrows of arrays of any type in sizes up to the
+//! bound set for this library at compile-time.  The default is tuples of up to $COUNT items.
+//!
+//! The boundary can be adjusted by building with certain (mutually exclusive) feature flags:
+//!  * (none) - the default is up to $COUNT_SMALL items
+//!  * `medium` - up to $COUNT_MEDIUM items
+//!  * `large` - up to $COUNT_LARGE items
+//!  * `huge` - up to $COUNT_HUGE items
+//!
+//! The larger sizes are likely only of utility in generated code, but they are available if you need them, but
+//! can result in substantial build times.
+
+mod generated_tests;
+mod test;
+
+/// To ensure clashing implementations cannot be created.
+trait Sealed {}
+
+/// A trait which applies to any Rust array with a dimension smaller than or equal to $COUNT
+/// elements, which will convert the array into a tuple of the same dimension.
+#[allow(private_bounds)]
+pub trait IntoTuple<const N: usize, E, T> : Sealed {
+    /// Returns a tuple of the same dimension as the passed array.
+    fn into_tuple(self) -> T;
+}

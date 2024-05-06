@@ -1,0 +1,20 @@
+[package]
+name = "into_tuple"
+description = "A trait for converting arrays into tuples"
+homepage = "https://github.com/timboudreau/into_tuple/tree/main"
+repository = "https://github.com/timboudreau/into_tuple.git"
+edition = "2021"
+authors = ["Tim Boudreau <tim@timboudreau.com>"]
+license = "MIT"
+version = "0.1.0"
+
+[lib]
+crate-type = ["lib"]
+path = "src/lib.rs"
+
+[features]
+default = []
+medium = []
+large = []
+huge = []
+
